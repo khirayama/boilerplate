@@ -1,0 +1,49 @@
+{
+  "name": "boilplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:html": "jade src --out ./dist",
+    "watch:html": "jade -w src --out ./dist",
+    "build:css": "sass src/styles/index.sass:dist/index.css --style compressed --sourcemap=none",
+    "watch:css": "sass -w src/styles/index.sass:dist/index.css --style compressed",
+    "build:js": "browserify src/scripts/index.js -t babelify -o dist/bundle.js --extension=jsx",
+    "watch:js": "watchify src/scripts/index.js -t babelify -o dist/bundle.js --extension=jsx --debug",
+    "server": "browser-sync start --server \"dist\" --files \"src/**/*.js\", \"src/**/*.sass\", \"src/**/*.jade\" --port 3000 --reload-delay 300 --no-notify",
+    "build": "npm run build:html & npm run build:css &npm run build:js",
+    "lint": "eslint ./src --ext=js --ext=jsx",
+    "watch": "npm run watch:html & npm run watch:css & npm run watch:js",
+    "develop": "npm run watch & npm run server",
+    "start": "npm run watch",
+    "test": "mocha --require=babel-core/register",
+    "check": "browserify index.js -t babelify"
+  },
+  "author": "",
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": "airbnb"
+  },
+  "babel": {
+    "presets": ["es2015", "react"]
+  },
+  "devDependencies": {
+    "babel": "^6.3.13",
+    "babel-core": "^6.3.17",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browser-sync": "^2.10.0",
+    "browserify": "^12.0.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^2.0.0",
+    "eslint-plugin-react": "^3.11.3",
+    "jade": "^1.11.0",
+    "mocha": "^2.3.4",
+    "node-sass": "^3.4.2",
+    "power-assert": "^1.2.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "watchify": "^3.6.1"
+  }
+}
